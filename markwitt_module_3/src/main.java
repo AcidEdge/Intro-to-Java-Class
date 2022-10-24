@@ -14,10 +14,8 @@
  //imports:
 
 import java.util.Random;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,14 +57,12 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     
     JPanel myPanel = new JPanel();
     JPanel myPanel2 = new JPanel();    
-    JLabel title = new JLabel("Lets Play! Choose:");    
+    JLabel title = new JLabel("Lets Play! Choose:");
+    title.setFont(new Font("Arial", Font.PLAIN, 25));    
     JButton rock = new JButton(new ImageIcon("img/rock.png"));
     JButton paper = new JButton(new ImageIcon("img/paper.png"));
     JButton scissors = new JButton(new ImageIcon("img/scissor.png"));
-    //title.setBounds(90, 50,150, 25);    
-    //rock.setBounds(100, 100, 100, 100);
-    //paper.setBounds(200, 200, 100, 100);
-    //scissors.setBounds(300, 300, 100, 100);
+
     rock.setActionCommand("rock");
     rock.addActionListener(new ActionListener(){
         @Override
@@ -105,18 +101,23 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     myPanel2.add(paper);
     myPanel2.add(scissors);
     //set frame specifics:
-    myFrame.setSize(600,600);
+    myFrame.setSize(650,400);
     myFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
     myFrame.setVisible(true);
     myFrame.setAlwaysOnTop(true);
     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    myFrame.setLocationRelativeTo(null);
    // myFrame.setTitle("Rock, Paper, Scissors!");  
    myFrame.add(myPanel);
    myFrame.add(myPanel2);
     }
 
     public static void gameResults(String playerChoice, String result, String results, String compsChoice, int playerChoiceInt, int compChoice){
-    //game outcome logic:
+        //lock frame so player can only click button once before results given:
+       myFrame.getContentPane().removeAll();
+        SwingUtilities.updateComponentTreeUI(myFrame);
+        
+        //game outcome logic:
         if (playerChoiceInt == 0 && compChoice == 0){
             result = "Both chose Rock.";
             results = "It's a Tie.";
@@ -161,25 +162,45 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     String choiceResults = "Computer chose: " + compsChoice;
     JPanel choices = new JPanel();
     JLabel choicesLabel = new JLabel(choiceResults);
-    choicesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    choicesLabel.setFont(new Font("Arial", Font.PLAIN, 25));
     choices.add(choicesLabel);
     myFrame.add(choices);
     JPanel resultPanel = new JPanel();
     JLabel resultLabel = new JLabel(result);
-    resultLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    resultLabel.setFont(new Font("Arial", Font.PLAIN, 25));
     resultPanel.add(resultLabel);
     myFrame.add(resultPanel);
     JPanel resultsPanel = new JPanel();
     JLabel resultsLabel = new JLabel(results);
-    resultsLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    resultsLabel.setFont(new Font("Arial", Font.BOLD, 25));
     resultsPanel.add(resultsLabel);
     myFrame.add(resultsPanel);
     
     //provide options to play again or exit:
+    JButton playAgain = new JButton(new ImageIcon("img/playagain.png"));
+    JButton exit = new JButton(new ImageIcon("img/exit.png"));
+    JPanel again = new JPanel();
+    again.add(playAgain);
+    again.add(exit);
+    myFrame.add(again);
 
-
-
+    
     SwingUtilities.updateComponentTreeUI(myFrame);
+    exit.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        String choice = e.getActionCommand();
+        System.exit(0);
+        }}); 
+    playAgain.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        String choice = e.getActionCommand();
+        myFrame.getContentPane().removeAll();
+        SwingUtilities.updateComponentTreeUI(myFrame);
+        mainGame();
+        }}); 
+
     
     }
     
