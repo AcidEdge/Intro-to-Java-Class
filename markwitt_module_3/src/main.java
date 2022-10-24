@@ -6,24 +6,16 @@
  * 10/24/2022
  */
 
-/**
- *
- * @author markw
- */
-
  //imports:
-
 import java.util.Random;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*; 
 
-
 public class main{  
-
+//create gloabl variables:
 static String playerChoice;
 static String compsChoice = "";
 static String result = "";
@@ -33,10 +25,13 @@ static int compChoice;
 static JFrame myFrame = new JFrame("Rock Paper Scissors!");
 
     //create main game:
-    public static void mainGame() {
+public static void mainGame() {
     //create variable for player choice:
     playerChoice = "";
     //computer chooses rock/paper/scissor:
+    //0 = rock
+    //1 = paper
+    //2 = scissors
     Random rand = new Random();
     int compChoice = rand.nextInt(3);
     switch (compChoice){
@@ -50,11 +45,8 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
             compsChoice = "scissors";
             break;
     }
-    System.out.println(compChoice);
-    System.out.println(compsChoice);
         
     // create game frame and elements:
-    
     JPanel myPanel = new JPanel();
     JPanel myPanel2 = new JPanel();    
     JLabel title = new JLabel("Lets Play! Choose:");
@@ -62,7 +54,7 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     JButton rock = new JButton(new ImageIcon("img/rock.png"));
     JButton paper = new JButton(new ImageIcon("img/paper.png"));
     JButton scissors = new JButton(new ImageIcon("img/scissor.png"));
-
+    //setup action commands for game buttons:
     rock.setActionCommand("rock");
     rock.addActionListener(new ActionListener(){
         @Override
@@ -107,13 +99,13 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     myFrame.setAlwaysOnTop(true);
     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myFrame.setLocationRelativeTo(null);
-   // myFrame.setTitle("Rock, Paper, Scissors!");  
-   myFrame.add(myPanel);
-   myFrame.add(myPanel2);
+    myFrame.add(myPanel);
+    myFrame.add(myPanel2);
     }
 
+    //method for game results:
     public static void gameResults(String playerChoice, String result, String results, String compsChoice, int playerChoiceInt, int compChoice){
-        //lock frame so player can only click button once before results given:
+        //lock frame so player can only click button once before results given(clears game screen/frame):
        myFrame.getContentPane().removeAll();
         SwingUtilities.updateComponentTreeUI(myFrame);
         
@@ -154,11 +146,7 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
             result = "Both chose Scissors.";
             results = "It's a Tie.";
         }
-//Output. includes system out and output to panel
-    System.out.println("Computer chose: " + compsChoice);
-    System.out.println("You Chose: " + playerChoice);
-    System.out.println(result);
-    System.out.println(results);
+//Output game results to panel, draw play again and exit buttons, redraw panel:
     String choiceResults = "Computer chose: " + compsChoice;
     JPanel choices = new JPanel();
     JLabel choicesLabel = new JLabel(choiceResults);
@@ -184,40 +172,24 @@ static JFrame myFrame = new JFrame("Rock Paper Scissors!");
     again.add(exit);
     myFrame.add(again);
 
-    
+    //action listener for play again/exit buttons:
     SwingUtilities.updateComponentTreeUI(myFrame);
     exit.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
-        String choice = e.getActionCommand();
         System.exit(0);
         }}); 
     playAgain.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
-        String choice = e.getActionCommand();
         myFrame.getContentPane().removeAll();
         SwingUtilities.updateComponentTreeUI(myFrame);
         mainGame();
-        }}); 
-
-    
+        }});     
     }
     
-
-
     public static void main(String[] args){
         //main method...run program
         mainGame();
     }
-
-    }
-
-
-
-
-
-
-    
-    
-
+}
