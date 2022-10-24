@@ -148,6 +148,12 @@ public static void mainGame() {
         }
 //Output game results to panel, draw play again and exit buttons, redraw panel:
     String choiceResults = "Computer chose: " + compsChoice;
+    String playerMove = "You Chose: " + playerChoice;
+    JPanel playchoices = new JPanel();
+    JLabel playchoicesLabel = new JLabel(playerMove);
+    playchoicesLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+    playchoices.add(playchoicesLabel);
+    myFrame.add(playchoices);
     JPanel choices = new JPanel();
     JLabel choicesLabel = new JLabel(choiceResults);
     choicesLabel.setFont(new Font("Arial", Font.PLAIN, 25));
