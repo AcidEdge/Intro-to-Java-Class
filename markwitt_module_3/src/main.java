@@ -16,18 +16,29 @@
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*; 
 
+
 public class main{  
-      
+
+static String playerChoice;
+static String compsChoice;
+static String result;
+static String results;
+static int playerChoiceInt;
+static int compChoice;
+
     //create main game:
     public static void mainGame() {
     //create variable for player choice:
-    String playerChoice = "";
+    playerChoice = "";
     //computer chooses rock/paper/scissor:
     Random rand = new Random();
     int compChoice = rand.nextInt(3);
     String compsChoice = "";
+    String result = "";
+    String results = "";
     switch (compChoice){
         case 0:
             compsChoice = "rock";
@@ -39,8 +50,9 @@ public class main{
             compsChoice = "scissors";
             break;
     }
+    
         
-    // create frame and elements:
+    // create game frame and elements:
     JFrame myFrame = new JFrame();
     JLabel title = new JLabel("Rock Paper Scissors!");
     JLabel title2 = new JLabel("Choose:");
@@ -58,28 +70,31 @@ public class main{
         public void actionPerformed(ActionEvent e) {
         String choice = e.getActionCommand();
         System.out.println(choice);
-        }
         String playerChoice = "rock";
-        });
+        int playerChoiceInt = 0;
+        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt);
+        }});
     paper.setActionCommand("paper");
     paper.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
         String choice = e.getActionCommand();
         System.out.println(choice);
-        //playerChoice = "paper";
-        }
-        });
+        String playerChoice = "paper";
+        int playerChoiceInt = 1;
+        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt);
+        }});
     scissors.setActionCommand("scissors");
     scissors.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
         String choice = e.getActionCommand();
         System.out.println(choice);
-        //playerChoice = "scissors";
-        }
-        });    
-    System.out.println("computers choice: " + compsChoice);
+        int playerChoiceInt = 2;
+        String playerChoice = "scissors";
+        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt);
+        }});    
+   
     
     // add elements to frame:
     myFrame.add(title);
@@ -94,53 +109,61 @@ public class main{
     myFrame.setAlwaysOnTop(true);
     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myFrame.setTitle("Rock, Paper, Scissors!");  
-    String result = "";
-    String results = "";
-        
-    if (playerChoice == "rock"){
-        switch(compsChoice){
-            case "rock":
-                result = "It's a Tie!";
-                break;
-            case "paper":
-                result = "Computer Wins!";
-                results = "Paper beats Rock!";
-                break;
-            case "scissors":
-                result = "You Win!";
-                results = "Rock beats Scissors!";
-                break;
-        }}
-    else if (playerChoice == "paper"){
-        switch(compsChoice){
-            case "rock":
-                result = "You Win!";
-                results = "Paper beats Rock!";
-                break;
-            case "paper":
-                result = "It's a Tie!";
-                break;
-            case "scissors":
-                result = "Computer Wins!";
-                results = "Scissors beat Paper!";
-                break;
-        }}
-    else {
-        switch(compsChoice){
-            case "rock":
-                result = "Computer Wins!";
-                results = "Rock beats Scissors";
-                break;
-            case "paper":
-                result = "You Win!";
-                results = "Scissors beat Paper!";
-                break;
-            case "scissors":
-                result = "It's a Tie!";
-                break;
-        }}
+
+    }
+
+    public static void gameResults(String playerChoice, String result, String results, String compsChoice, int playerChoiceInt){
+        switch(playerChoiceInt){
+            case 0:
+                switch(compChoice){
+                    case 0:
+                        result = "It's a Tie!";
+                        results = "Both chose Rock.";
+                        break;
+                    case 1:
+                        result = "Computer Wins!";
+                        results = "Paper beats Rock!";
+                        break;
+                    case 2:
+                        result = "You Win!";
+                        results = "Rock beats Scissors!";
+                        break;
+                    }
+            case 1:
+                switch(compChoice){
+                    case 0:
+                        result = "You Win!";
+                        results = "Paper beats Rock!";
+                        break;
+                    case 1:
+                        result = "It's a Tie!";
+                        results = "Both chose Paper.";
+                        break;
+                    case 2:
+                        result = "Computer Wins!";
+                        results = "Scissors beat Paper!";
+                        break;
+                    }
+            case 2:
+                switch(compChoice){
+                    case 0:
+                        result = "Computer Wins!";
+                        results = "Rock beats Scissors!";
+                        break;
+                    case 1:
+                        result = "You Win!";
+                        results = "Scissors beats Paper!";
+                        break;
+                    case 2:
+                        result = "It's a Tie!";
+                        results = "Both chose Scissors.";
+                        break;
+                    }
+        }
+//insert output here.
     
     }
+    
 
 
     public static void main(String[] args){
