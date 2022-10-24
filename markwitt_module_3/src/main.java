@@ -16,6 +16,7 @@
 import java.util.Random;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ static String result = "";
 static String results = "";
 static int playerChoiceInt;
 static int compChoice;
+static JFrame myFrame = new JFrame("Rock Paper Scissors!");
 
     //create main game:
     public static void mainGame() {
@@ -54,17 +56,17 @@ static int compChoice;
     System.out.println(compsChoice);
         
     // create game frame and elements:
-    JFrame myFrame = new JFrame("Rock Paper Scissors!");
+    
     JPanel myPanel = new JPanel();
     JPanel myPanel2 = new JPanel();    
     JLabel title = new JLabel("Lets Play! Choose:");    
     JButton rock = new JButton(new ImageIcon("img/rock.png"));
     JButton paper = new JButton(new ImageIcon("img/paper.png"));
     JButton scissors = new JButton(new ImageIcon("img/scissor.png"));
-    title.setBounds(90, 50,150, 25);    
-    rock.setBounds(100, 100, 100, 100);
-    paper.setBounds(200, 200, 100, 100);
-    scissors.setBounds(300, 300, 100, 100);
+    //title.setBounds(90, 50,150, 25);    
+    //rock.setBounds(100, 100, 100, 100);
+    //paper.setBounds(200, 200, 100, 100);
+    //scissors.setBounds(300, 300, 100, 100);
     rock.setActionCommand("rock");
     rock.addActionListener(new ActionListener(){
         @Override
@@ -151,11 +153,33 @@ static int compChoice;
             result = "Both chose Scissors.";
             results = "It's a Tie.";
         }
-//insert output here.
+//Output. includes system out and output to panel
     System.out.println("Computer chose: " + compsChoice);
     System.out.println("You Chose: " + playerChoice);
     System.out.println(result);
     System.out.println(results);
+    String choiceResults = "Computer chose: " + compsChoice;
+    JPanel choices = new JPanel();
+    JLabel choicesLabel = new JLabel(choiceResults);
+    choicesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    choices.add(choicesLabel);
+    myFrame.add(choices);
+    JPanel resultPanel = new JPanel();
+    JLabel resultLabel = new JLabel(result);
+    resultLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    resultPanel.add(resultLabel);
+    myFrame.add(resultPanel);
+    JPanel resultsPanel = new JPanel();
+    JLabel resultsLabel = new JLabel(results);
+    resultsLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+    resultsPanel.add(resultsLabel);
+    myFrame.add(resultsPanel);
+    
+    //provide options to play again or exit:
+
+
+
+    SwingUtilities.updateComponentTreeUI(myFrame);
     
     }
     
