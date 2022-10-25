@@ -22,30 +22,22 @@ static String result = "";
 static String results = "";
 static int playerChoiceInt;
 static int compChoice;
+static String paperBeatsRock = "Paper beats Rock.";
+static String scissorBeatsPaper = "Scissors beat Paper.";
+static String rockBeatsScissor = "Rock beats Scissors";
+static String compWins = "Computer Wins.";
+static String playerWins = "You Win!";
+static String tie = "It's a Tie.";
 static JFrame myFrame = new JFrame("Rock Paper Scissors!");
 
-    //create main game:
+//create main game:
 public static void mainGame() {
-    //create variable for player choice:
+    //clear variable for player choice:
     playerChoice = "";
     //computer chooses rock/paper/scissor:
-    //0 = rock
-    //1 = paper
-    //2 = scissors
-    Random rand = new Random();
-    int compChoice = rand.nextInt(3);
-    switch (compChoice){
-        case 0:
-            compsChoice = "rock";
-            break;
-        case 1:
-            compsChoice = "paper";
-            break;
-        case 2:
-            compsChoice = "scissors";
-            break;
-    }
-        
+    String[] choices = {"rock", "paper", "scissors"};
+    compsChoice = choices[new Random().nextInt(choices.length)];
+         
     // create game frame and elements:
     JPanel myPanel = new JPanel();
     JPanel myPanel2 = new JPanel();    
@@ -54,40 +46,27 @@ public static void mainGame() {
     JButton rock = new JButton(new ImageIcon("img/rock.png"));
     JButton paper = new JButton(new ImageIcon("img/paper.png"));
     JButton scissors = new JButton(new ImageIcon("img/scissor.png"));
-    //setup action commands for game buttons:
+    //setup action commands/listener for game buttons:
     rock.setActionCommand("rock");
     rock.addActionListener(new ActionListener(){
-        @Override
         public void actionPerformed(ActionEvent e) {
-        String choice = e.getActionCommand();
-        System.out.println(choice);
-        String playerChoice = "rock";
-        int playerChoiceInt = 0;
-        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt, compChoice);
+        String playerChoice = e.getActionCommand();
+        gameResults(playerChoice, result, results, main.compsChoice, compChoice);
         }});
     paper.setActionCommand("paper");
     paper.addActionListener(new ActionListener(){
-        @Override
         public void actionPerformed(ActionEvent e) {
-        String choice = e.getActionCommand();
-        System.out.println(choice);
-        String playerChoice = "paper";
-        int playerChoiceInt = 1;
-        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt, compChoice);
+        String playerChoice = e.getActionCommand();
+        gameResults(playerChoice, result, results, main.compsChoice, compChoice);
         }});
     scissors.setActionCommand("scissors");
     scissors.addActionListener(new ActionListener(){
-        @Override
         public void actionPerformed(ActionEvent e) {
-        String choice = e.getActionCommand();
-        System.out.println(choice);
-        int playerChoiceInt = 2;
-        String playerChoice = "scissors";
-        gameResults(playerChoice, result, results, main.compsChoice, playerChoiceInt, compChoice);
+        String playerChoice = e.getActionCommand();
+        gameResults(playerChoice, result, results, main.compsChoice, compChoice);
         }});    
-   
     
-    // add elements to frame:
+    //add elements to frame:
     myPanel.add(title);    
     myPanel2.add(rock);
     myPanel2.add(paper);
@@ -102,51 +81,49 @@ public static void mainGame() {
     myFrame.add(myPanel);
     myFrame.add(myPanel2);
     }
-
+ 
     //method for game results:
-    public static void gameResults(String playerChoice, String result, String results, String compsChoice, int playerChoiceInt, int compChoice){
+    public static void gameResults(String playerChoice, String result, String results, String compsChoice, int compChoice){
         //lock frame so player can only click button once before results given(clears game screen/frame):
-       myFrame.getContentPane().removeAll();
+        myFrame.getContentPane().removeAll();
         SwingUtilities.updateComponentTreeUI(myFrame);
-        
+         
         //game outcome logic:
-        if (playerChoiceInt == 0 && compChoice == 0){
-            result = "Both chose Rock.";
-            results = "It's a Tie.";
+    if (playerChoice.equals(compsChoice)){
+        result = "Both chose " + compsChoice;
+        results = tie;
         }
-        else if (playerChoiceInt == 0 && compChoice == 1){
-            result ="Paper beats Rock.";
-            results = "Computer Wins.";
+    else if (playerChoice.equals("rock")){
+        if (compsChoice.equals("paper")){
+            result = paperBeatsRock;
+            results = compWins;
+            }
+        else if (compsChoice.equals("scissors")){
+            result = rockBeatsScissor;
+            results = playerWins;
+            }
         }
-        else if (playerChoiceInt == 0 && compChoice == 2){
-            result = "Rock beats Scissors.";
-            results = "You Win!";
+    else if (playerChoice.equals("paper")){
+        if (compsChoice.equals("rock")){
+            result = paperBeatsRock;
+            results = playerWins;
+            }
+        else if (compsChoice.equals("scissors")){
+            result = scissorBeatsPaper;
+            results = compWins;
+            }
         }
-        else if (playerChoiceInt == 1 && compChoice == 0){
-            result = "Paper beats Rock.";
-            results = "You Win!";
-        }
-        else if (playerChoiceInt == 1 && compChoice == 1){
-            result = "Both chose Paper.";
-            results = "It's a Tie.";
-        }
-        else if (playerChoiceInt == 1 && compChoice == 2){
-            result = "Scissors beat Paper";
-            results = "Computer Wins.";
-        }
-        else if (playerChoiceInt == 2 && compChoice == 0){
-            result = "Rock beats Scissors";
-            results = "Computer Wins.";
-        }
-        else if (playerChoiceInt == 2 && compChoice == 1){
-            result = "Scissors beat Paper";
-            results = "You Win!";
-        }
-        else if (playerChoiceInt == 2 && compChoice == 2){
-            result = "Both chose Scissors.";
-            results = "It's a Tie.";
-        }
-//Output game results to panel, draw play again and exit buttons, redraw panel:
+    else if (playerChoice.equals("scissors")){
+        if (compsChoice.equals("rock")){
+            result = rockBeatsScissor;
+            results = compWins;
+            }
+        else if (compsChoice.equals("paper")){
+                result = scissorBeatsPaper;
+                results = playerWins;
+            }
+        }    
+ //Output game results to panel, draw play again and exit buttons, redraw panel:
     String choiceResults = "Computer chose: " + compsChoice;
     String playerMove = "You Chose: " + playerChoice;
     JPanel playchoices = new JPanel();
@@ -169,7 +146,7 @@ public static void mainGame() {
     resultsLabel.setFont(new Font("Arial", Font.BOLD, 25));
     resultsPanel.add(resultsLabel);
     myFrame.add(resultsPanel);
-    
+     
     //provide options to play again or exit:
     JButton playAgain = new JButton(new ImageIcon("img/playagain.png"));
     JButton exit = new JButton(new ImageIcon("img/exit.png"));
@@ -177,23 +154,21 @@ public static void mainGame() {
     again.add(playAgain);
     again.add(exit);
     myFrame.add(again);
-
+ 
     //action listener for play again/exit buttons:
     SwingUtilities.updateComponentTreeUI(myFrame);
     exit.addActionListener(new ActionListener(){
-        @Override
         public void actionPerformed(ActionEvent e) {
         System.exit(0);
         }}); 
     playAgain.addActionListener(new ActionListener(){
-        @Override
         public void actionPerformed(ActionEvent e) {
         myFrame.getContentPane().removeAll();
         SwingUtilities.updateComponentTreeUI(myFrame);
         mainGame();
         }});     
     }
-    
+     
     public static void main(String[] args){
         //main method...run program
         mainGame();
