@@ -123,7 +123,7 @@ public static void mainGame() {
                 results = playerWins;
             }
         }    
- //Output game results to panel, draw play again and exit buttons, redraw panel:
+    //Output game results to panel, draw play again and exit buttons, redraw panel:
     String choiceResults = "Computer chose: " + compsChoice;
     String playerMove = "You Chose: " + playerChoice;
     JPanel playchoices = new JPanel();
@@ -170,7 +170,7 @@ public static void mainGame() {
     }
      
     public static void main(String[] args){
-        //main method...run program
+        //main method...run game
         mainGame();
     }
 }
