@@ -20,7 +20,7 @@ public class main {
         
         //while loop for small to large
         while (smallToLarge < 100){
-            while (smallToLarge < 99){      //while loop for cleaner output (last of the series will have different output to remove the + at end)
+            while (smallToLarge < 98){      //while loop for cleaner output (last of the series will have different output to remove the + at end)
                 System.out.println("1/" + smallToLarge + "\n+");
                 answer1 = answer1 + (1/smallToLarge);
                 smallToLarge = smallToLarge + 2;
