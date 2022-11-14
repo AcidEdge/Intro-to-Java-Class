@@ -31,11 +31,9 @@ public class PasswordChecker {
         System.out.println();       //new line for spacing
         
         if(password.equals("showcommonpasswords")){           //if input is "showcommonpasswords", lists common passwords from file
-            
             PasswordList.showPasswordList();
             OutputDisplay.clearScreen();
             checkPassword();            //restarts password checker after using
-    
         }
        else if(password.equals("addtopasswordlist")){       //if input is "addpasswordtolist", allows user to add common password to prohibited file
             PasswordList.addToPasswordList();
