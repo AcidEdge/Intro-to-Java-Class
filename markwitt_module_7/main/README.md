@@ -28,6 +28,6 @@ Meanwhile, the compiled output files will be generated in the `bin`.
 
 > `.vscode/settings.json` contains folder structure related settings.
 
-## Dependency Management
+## Uses
+This program was created for an assignment. Creator assumes no responsibility/liability for its use by others. 
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
