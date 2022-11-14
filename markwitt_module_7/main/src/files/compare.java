@@ -24,7 +24,7 @@ public class Compare {
             passlist = passlist + listScanner.nextLine();
         }
         listScanner.close();
-        return passlist.contains(password); 
+        return passlist.contains(password.toLowerCase()); 
 }
 
     public static boolean isvalid(String password, String passwordRequirements){
