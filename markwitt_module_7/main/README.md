@@ -10,7 +10,7 @@ considered valid, and if not it gives the user the reasons why/what requirements
 The workspace contains two folders by default, where:
 
 - `src`: the folder to maintain sources. Contains main App.java
-  - `files`: folder containing the packages for the app. Found within `src` folder
+  - `files`: folder containing the packages for the app. 
 - `lib`: the folder to maintain dependencies
 
 Meanwhile, the compiled output files will be generated in the `bin`.
