@@ -2,15 +2,21 @@
 
 import java.io.IOException;
 import java.util.Scanner;
-
 import files.compare;
+import files.passwordlist;
 
 
 public class App {
 
     static Scanner input = new Scanner(System.in);
     static String passwordRequirements = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,20}$"; 
+    static String lowerRequire = "^(?=.*[a-z])$";
+    static String upperRequire = "^(?=.*[A-Z])$";
+    static String numRequire = "^(?.*\\d)$";
+    static String specialRequire = "^(?=.*[!@#$%^&*])$";
+    static String lengthRequire = "^.{8,20}$";   
     static String passwordLimits;
+
     public static void main(String[] args) throws Exception {
         passwordRules();
         
@@ -26,20 +32,20 @@ public class App {
         System.out.println("5. Password be at least 8 characters.");
         System.out.println("6. Passowrd cannot be/contain the top 20 common passwords");
     
-        checkPassword(passwordRequirements);
+        checkPassword();
     }  
         
-    public static void checkPassword(String PasswordRequirements) throws IOException{
+    public static void checkPassword() throws IOException{
         System.out.print("\n\nEnter Password: ");       
         String password = input.nextLine();
         System.out.println();
         if(password.equals("editpasswordlist")){
-            compare.secretMenu();
+            passwordlist.secretMenu();
         }
         else{        
         boolean containsCommon = compare.commonPasswords(password);
-        
         boolean valid = compare.isvalid(password, passwordRequirements);
+        
         passwordResults(valid, containsCommon, password);
     }}
 
