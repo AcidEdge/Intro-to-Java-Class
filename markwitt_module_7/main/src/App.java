@@ -1,66 +1,35 @@
+/*
+ * Mark Witt
+ * CSD-320
+ * Assignment for module 7
+ * Create a method that checks whether a users input String is a valid password, following given password rules.
+ * Notes:
+ * Provided rules incuded 1 uppercase, 1 lowercase, 1 number, and minimum length of 8 characters. 
+ * I added requirements for 1 special character, a max length of 20 characters, and requirements
+ * that the user input is not one of the most common passwords.
+ * Most common passwords obtained from wikipedia: https://en.wikipedia.org/wiki/List_of_the_most_common_passwords
+ * Used Regex for comarison of user input password to a pattern of password requirements. Obtained Regex info/uses from:
+ * https://www.digitalocean.com/community/tutorials/regular-expression-in-java-regex-example
+ * Regex comparison returns boolean results. 
+ * Also implimented a way to compare user input password to the contents of a passwordlist.txt file, a file which 
+ * contain the list of common passwords from wikipedia. Program uses .contains(password) to compare password
+ * to file contents, returning a boolean result. 
+ * For handling passwordlist.txt, On password input line:
+ * to read contents of passwordlist.txt - enter: showcommonpasswords 
+ * to add another common password to list file - enter: addtopasswordlist
+ */
 
-
+ //imports:
 import java.io.IOException;
-import java.util.Scanner;
-import files.Compare;
-import files.PasswordList;
-
-
+import files.OutputDisplay;
+import files.PasswordChecker;
 
 
 public class App {
 
-    static Scanner input = new Scanner(System.in);
-    
-
-
-
-    public static void main(String[] args) throws Exception {
-        passwordRules();
-        
-    }
-
-   
-    public static void passwordRules() throws IOException{
-        System.out.println("\nPlease choose a password with the following requirements: ");
-        System.out.println("1. Requires at least one uppercase letter");
-        System.out.println("2. Requires at least one lowercase letter");
-        System.out.println("3. Requires at least one number");
-        System.out.println("4. Requires at least one special character (!@#$%^&*)");
-        System.out.println("5. Password be at least 8 characters.");
-        System.out.println("6. Passowrd cannot be/contain the top 20 common passwords");
-    
-        checkPassword();
-    }  
-        
-    public static void checkPassword() throws IOException{
-        System.out.print("\n\nEnter Password: ");       
-        String password = input.nextLine();
-        System.out.println();
-        if(password.equals("editpasswordlist")){
-            PasswordList.secretMenu();
-        }
-        else{        
-        boolean containsCommon = Compare.commonPasswords(password);
-        boolean valid = Compare.isvalid(password);
-
-        
-        passwordResults(valid, containsCommon, password);
-    }}
-
-    public static void passwordResults(boolean valid, boolean containsCommon, String password){
-        if (valid == true && containsCommon == false){
-            
-            System.out.println(password + " is a valid password.");
-            }           
-        else {
-            System.out.println(password + " is not a valid password");
-            }
-        
-        if(containsCommon == true){
-            System.out.println(password + " is one of the most common passwords.");
-        }
-
+    public static void main(String[] args) throws IOException, InterruptedException  {  //main run method
+        OutputDisplay.clearScreen();        //clear screen (for cleaner output of program)
+        System.out.println("Welcome to the Witt Enterprises Password Validation Tool. \n\n");
+        PasswordChecker.checkPassword();    //begin running password checker
     }
 }
-
