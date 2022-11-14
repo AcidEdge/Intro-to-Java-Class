@@ -13,7 +13,8 @@ considered valid, and if not it gives the user the reasons why/what requirements
 - Compare: contains the methods for comparing user input to password requirements, 
   and comparing with common password list (found in txt file)
 - OutputDisplay: misc output formmating methods, also incluse method for running again
-- PasswordList: contains methods for reading passwordlist.txt, and adding to the list
+- PasswordList: contains methods for reading passwordlist.txt, and adding to the list.
+  Instructions to access these methods included in comments at begining of App.java
 - passwordlist.txt: text file containing the list of most commonly used passwords
 
 ## Folder Structure
