@@ -1,18 +1,16 @@
 package files;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.io.BufferedReader;
+import java.util.Scanner;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.regex.*;
 
 
-public class compare {
+public class Compare {
+ 
     public static boolean comparison;
-    public static boolean commonPasswords(String password) throws IOException {
+   /*  public static boolean commonPasswords(String password) throws IOException {
         File passListFile = new File("main/src/files/passwordlist.txt");
         String path = passListFile.getCanonicalPath();
         List<String> passwordsList = new ArrayList<>();
@@ -45,8 +43,22 @@ public class compare {
         System.out.println("comparison matcher: " + comparison);
         return comparison;
     }
+*/
+static String passlist;
+    public static boolean commonPasswords(String password) throws FileNotFoundException{
 
-    public static boolean isvalid(String password, String passwordRequirements){
+        File passListFile = new File("main/src/files/passwordlist.txt");
+        Scanner listScanner = new Scanner(passListFile);
+        while(listScanner.hasNextLine()){
+            passlist = passlist + listScanner.nextLine();
+        }
+        listScanner.close();
+        return passlist.contains(password);
+        
+}
+
+    public static boolean isvalid(String password){
+        String passwordRequirements = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,20}$"; 
         Pattern pattern = Pattern.compile(passwordRequirements);
         Matcher matcher = pattern.matcher(password);
         System.out.println("pattern matcher: " +matcher.matches());

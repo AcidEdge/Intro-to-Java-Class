@@ -2,20 +2,18 @@
 
 import java.io.IOException;
 import java.util.Scanner;
-import files.compare;
-import files.passwordlist;
+import files.Compare;
+import files.PasswordList;
+
+
 
 
 public class App {
 
     static Scanner input = new Scanner(System.in);
-    static String passwordRequirements = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,20}$"; 
-    static String lowerRequire = "^(?=.*[a-z])$";
-    static String upperRequire = "^(?=.*[A-Z])$";
-    static String numRequire = "^(?.*\\d)$";
-    static String specialRequire = "^(?=.*[!@#$%^&*])$";
-    static String lengthRequire = "^.{8,20}$";   
-    static String passwordLimits;
+    
+
+
 
     public static void main(String[] args) throws Exception {
         passwordRules();
@@ -40,11 +38,12 @@ public class App {
         String password = input.nextLine();
         System.out.println();
         if(password.equals("editpasswordlist")){
-            passwordlist.secretMenu();
+            PasswordList.secretMenu();
         }
         else{        
-        boolean containsCommon = compare.commonPasswords(password);
-        boolean valid = compare.isvalid(password, passwordRequirements);
+        boolean containsCommon = Compare.commonPasswords(password);
+        boolean valid = Compare.isvalid(password);
+
         
         passwordResults(valid, containsCommon, password);
     }}

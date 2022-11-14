@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class passwordlist {
+public class PasswordList {
     public static void secretMenu() throws IOException {
         System.out.println("you found the secret menu!");
         File passListFile = new File("main/src/files/passwordlist.txt");
