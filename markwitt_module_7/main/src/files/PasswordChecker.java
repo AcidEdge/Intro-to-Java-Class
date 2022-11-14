@@ -29,7 +29,10 @@ public class PasswordChecker {
         System.out.print("\n\nEnter Password: ");       
         String password = input.nextLine();
         System.out.println();       //new line for spacing
-        
+        if(password.equals("") || password.contains(" ")){
+            System.out.println("Error, you did not enter a password!");
+            checkPassword();
+        }
         if(password.equals("showcommonpasswords")){           //if input is "showcommonpasswords", lists common passwords from file
             PasswordList.showPasswordList();
             OutputDisplay.clearScreen();
