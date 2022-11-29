@@ -147,9 +147,9 @@ public class App {
     static float average(int[] array){
         float avg = 0;
         for (int i = 0; i < array.length; i++){
-            avg = avg + (float)array[i];
+            avg += (float)array[i];
         }
-        avg = avg / array.length;
+        avg /= array.length;
         return avg;
     }
 
@@ -157,7 +157,7 @@ public class App {
     static int sum(int[] array){
         int sum = 0;
         for (int i=0; i < array.length; i++){
-            sum = sum + array[i];
+            sum += array[i];
         }
         return sum;
     }
